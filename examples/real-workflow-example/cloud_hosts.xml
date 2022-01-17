@@ -4,15 +4,15 @@
     <zone id="AS0" routing="Full">
         <host id="Tremblay" speed="1000Gf" core="4"/>
         <host id="Jupiter" speed="1000Gf" core="2"/>
-        <host id="Fafard" speed="1000Gf" core="1">
-            <disk id="large_disk" read_bw="40MBps" write_bw="40MBps">
-                <prop id="size" value="5000GiB"/>
+        <host id="Fafard" speed="500Gf" core="6">
+            <disk id="large_disk" read_bw="2500MBps" write_bw="2500MBps">
+                <prop id="size" value="500GiB"/>
                 <prop id="mount" value="/"/>
             </disk>
         </host>
 
         <!-- A network link -->
-        <link id="network_link" bandwidth="125MBps" latency="100us"/>
+        <link id="network_link" bandwidth="1250000MBps" latency="0us"/>
         <!-- Tremblay's local "loopback" link...-->
         <link id="loopback_Tremblay" bandwidth="1000EBps" latency="0us"/>
         <!-- Jupiter's local "loopback" link...-->

@@ -2,9 +2,9 @@
 <!DOCTYPE platform SYSTEM "https://simgrid.org/simgrid.dtd">
 <platform version="4.1">
     <zone id="AS0" routing="Full">
-        <host id="Tremblay" speed="1000Gf" core="4"/>
-        <host id="Jupiter" speed="1000Gf" core="2"/>
-        <host id="Fafard" speed="430Gf" core="8">
+        <host id="Host1" speed="1000Gf" core="4"/>
+        <host id="Host2" speed="1000Gf" core="2"/>
+        <host id="Host3" speed="430Gf" core="8">
             <disk id="large_disk" read_bw="4700MBps" write_bw="4700MBps">
                 <prop id="size" value="500GiB"/>
                 <prop id="mount" value="/"/>
@@ -13,33 +13,33 @@
 
         <!-- A network link -->
         <link id="network_link" bandwidth="1250000MBps" latency="0us"/>
-        <!-- Tremblay's local "loopback" link...-->
-        <link id="loopback_Tremblay" bandwidth="1000EBps" latency="0us"/>
-        <!-- Jupiter's local "loopback" link...-->
-        <link id="loopback_Jupiter" bandwidth="1000EBps" latency="0us"/>
-        <!-- Fafard's local "loopback" link...-->
-        <link id="loopback_Fafard" bandwidth="1000EBps" latency="0us"/>
+        <!-- Host1's local "loopback" link...-->
+        <link id="loopback_Host1" bandwidth="1000EBps" latency="0us"/>
+        <!-- Host2's local "loopback" link...-->
+        <link id="loopback_Host2" bandwidth="1000EBps" latency="0us"/>
+        <!-- Host3's local "loopback" link...-->
+        <link id="loopback_Host3" bandwidth="1000EBps" latency="0us"/>
 
         <!-- The network link connects all hosts together -->
-        <route src="Tremblay" dst="Jupiter">
+        <route src="Host1" dst="Host2">
             <link_ctn id="network_link"/>
         </route>
-        <route src="Fafard" dst="Tremblay">
+        <route src="Host3" dst="Host1">
             <link_ctn id="network_link"/>
         </route>
-        <route src="Fafard" dst="Jupiter">
+        <route src="Host3" dst="Host2">
             <link_ctn id="network_link"/>
         </route>
 
         <!-- Each loopback link connects each host to itself -->
-        <route src="Tremblay" dst="Tremblay">
-            <link_ctn id="loopback_Tremblay"/>
+        <route src="Host1" dst="Host1">
+            <link_ctn id="loopback_Host1"/>
         </route>
-        <route src="Jupiter" dst="Jupiter">
-            <link_ctn id="loopback_Jupiter"/>
+        <route src="Host2" dst="Host2">
+            <link_ctn id="loopback_Host2"/>
         </route>
-        <route src="Fafard" dst="Fafard">
-            <link_ctn id="loopback_Fafard"/>
+        <route src="Host3" dst="Host3">
+            <link_ctn id="loopback_Host3"/>
         </route>
         
     </zone>

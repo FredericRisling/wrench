@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
      * Throughout the simulation execution, input/output files of workflow tasks will be located
      * in this storage service.
      */
-    std::string storage_host = "Fafard";
+    std::string storage_host = "Host3";
     std::cerr << "Instantiating a SimpleStorageService on " << storage_host << "..." << std::endl;
     auto storage_service = simulation.add(new wrench::SimpleStorageService(storage_host, {"/"}));
     storage_services.insert(storage_service);
@@ -98,7 +98,7 @@ int main(int argc, char **argv) {
     /* Construct a list of hosts (in the example only one host) on which the
      * cloud service will be able to run tasks
      */
-    std::string executor_host = "Fafard";
+    std::string executor_host = "Host3";
     std::vector<std::string> execution_hosts = {executor_host};
 
     /* Create a list of compute services that will be used by the WMS */
@@ -114,7 +114,7 @@ int main(int argc, char **argv) {
      * terminate it will by 1024 bytes. See the documentation to find out all available
      * configurable properties for each kind of service.
      */
-    std::string wms_host = "Fafard";
+    std::string wms_host = "Host3";
 
     /* Add the cloud service to the simulation, catching a possible exception */
     try {

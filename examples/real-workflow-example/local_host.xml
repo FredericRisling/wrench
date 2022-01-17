@@ -1,46 +1,47 @@
-<?xml version='1.0'?>
-<!DOCTYPE platform SYSTEM "https://simgrid.org/simgrid.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE platform SYSTEM "http://simgrid.gforge.inria.fr/simgrid/simgrid.dtd">
 <platform version="4.1">
-    <zone id="AS0" routing="Full">
-        <host id="Tremblay" speed="1000Gf" core="4"/>
-        <host id="Jupiter" speed="1000Gf" core="2"/>
-        <host id="Fafard" speed="500Gf" core="6">
-            <disk id="large_disk" read_bw="2540.469MBps" write_bw="2540.469MBps">
-                <prop id="size" value="465GiB"/>
-                <prop id="mount" value="/"/>
-            </disk>
-        </host>
+	<zone id="AS0" routing="Full">
+		<host id="Host1" speed="518.602Gf" core="12"></host>
+		<host id="Host2" speed="518.602Gf" core="12"></host>
+		<host id="Host3" speed="518.602Gf" core="12">
+			<disk id="large_disk" read_bw="2641.027MBps" write_bw="2641.027MBps">
+				<prop id="size" value="465GiB"></prop>
+				<prop id="mount" value="/"></prop>
+			</disk>
+		</host>
 
-        <!-- A network link -->
-        <link id="network_link" bandwidth="1250000MBps" latency="0us"/>
-        <!-- Tremblay's local "loopback" link...-->
-        <link id="loopback_Tremblay" bandwidth="1000EBps" latency="0us"/>
-        <!-- Jupiter's local "loopback" link...-->
-        <link id="loopback_Jupiter" bandwidth="1000EBps" latency="0us"/>
-        <!-- Fafard's local "loopback" link...-->
-        <link id="loopback_Fafard" bandwidth="1000EBps" latency="0us"/>
+		<!-- A network link -->
+		<link id="network_link" bandwidth="5000GBps" latency="0us"></link>
+		<!-- Host1's local "loopback" link...-->
+		<link id="loopback_Host1" bandwidth="1000EBps" latency="0us"></link>
+		<!-- Host2's local "loopback" link...-->
+		<link id="loopback_Host2" bandwidth="1000EBps" latency="0us"></link>
+		<!-- Host3's local "loopback" link...-->
+		<link id="loopback_Host3" bandwidth="1000EBps" latency="0us"></link>
 
-        <!-- The network link connects all hosts together -->
-        <route src="Tremblay" dst="Jupiter">
-            <link_ctn id="network_link"/>
-        </route>
-        <route src="Fafard" dst="Tremblay">
-            <link_ctn id="network_link"/>
-        </route>
-        <route src="Fafard" dst="Jupiter">
-            <link_ctn id="network_link"/>
-        </route>
 
-        <!-- Each loopback link connects each host to itself -->
-        <route src="Tremblay" dst="Tremblay">
-            <link_ctn id="loopback_Tremblay"/>
-        </route>
-        <route src="Jupiter" dst="Jupiter">
-            <link_ctn id="loopback_Jupiter"/>
-        </route>
-        <route src="Fafard" dst="Fafard">
-            <link_ctn id="loopback_Fafard"/>
-        </route>
-        
-    </zone>
+		<!-- The network link connects all hosts together -->
+		<route src="Host1" dst="Host2">
+			<link_ctn id="network_link"></link_ctn>
+		</route>
+		<route src="Host1" dst="Host3">
+			<link_ctn id="network_link"></link_ctn>
+		</route>
+		<route src="Host2" dst="Host3">
+			<link_ctn id="network_link"></link_ctn>
+		</route>
+
+
+		<!-- Each loopback link connects each host to itself -->
+		<route src="Host1" dst="Host1">
+			<link_ctn id="loopback_Host1"></link_ctn>
+		</route>
+		<route src="Host2" dst="Host2">
+			<link_ctn id="loopback_Host2"></link_ctn>
+		</route>
+		<route src="Host3" dst="Host3">
+			<link_ctn id="loopback_Host3"></link_ctn>
+		</route>
+	</zone>
 </platform>
