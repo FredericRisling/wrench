@@ -2,9 +2,10 @@
 <!DOCTYPE platform SYSTEM "http://simgrid.gforge.inria.fr/simgrid/simgrid.dtd">
 <platform version="4.1">
 	<zone id="AS0" routing="Full">
-		<host id="Host1" speed="518.602Gf" core="12"></host>
-		<host id="Host2" speed="518.602Gf" core="12"></host>
-		<host id="Host3" speed="518.602Gf" core="12">
+	
+		<host id="Host1" speed="500Gf" core="6"></host>
+		<host id="Host2" speed="5000Gf" core="6"></host>
+		<host id="Host3" speed="500Gf" core="6">
 			<disk id="large_disk" read_bw="2641.027MBps" write_bw="2641.027MBps">
 				<prop id="size" value="465GiB"></prop>
 				<prop id="mount" value="/"></prop>
@@ -12,7 +13,7 @@
 		</host>
 
 		<!-- A network link -->
-		<link id="network_link" bandwidth="5000GBps" latency="0us"></link>
+		<link id="network_link" bandwidth="5000MBps" latency="0.0ms"></link>
 		<!-- Host1's local "loopback" link...-->
 		<link id="loopback_Host1" bandwidth="1000EBps" latency="0us"></link>
 		<!-- Host2's local "loopback" link...-->

@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
     std::cerr << "Loading workflow..." << std::endl;
     wrench::Workflow *workflow;
     if (ends_with(workflow_file, "dax")) {
-        workflow = wrench::PegasusWorkflowParser::createWorkflowFromDAX(workflow_file, "1000Gf");
+        workflow = wrench::PegasusWorkflowParser::createWorkflowFromDAX(workflow_file, "500Gf");
     } else if (ends_with(workflow_file,"json")) {
         workflow = wrench::PegasusWorkflowParser::createWorkflowFromJSON(workflow_file, "1000Gf");
     } else {
@@ -99,6 +99,7 @@ int main(int argc, char **argv) {
      * cloud service will be able to run tasks
      */
     std::string executor_host = "Host3";
+    //std::vector<std::string> execution_hosts = {executor_host, "Host2", "Host4", "Host5"};
     std::vector<std::string> execution_hosts = {executor_host};
 
     /* Create a list of compute services that will be used by the WMS */
@@ -114,7 +115,7 @@ int main(int argc, char **argv) {
      * terminate it will by 1024 bytes. See the documentation to find out all available
      * configurable properties for each kind of service.
      */
-    std::string wms_host = "Host3";
+    std::string wms_host = "Host1";
 
     /* Add the cloud service to the simulation, catching a possible exception */
     try {
@@ -196,6 +197,21 @@ int main(int argc, char **argv) {
     trace = simulation.getOutput().getTrace<wrench::SimulationTimestampTaskCompletion>();
     std::cerr << "Number of entries in TaskCompletion trace: " << trace.size() << std::endl;
     std::cerr << "Task in first trace entry: " << trace[0]->getContent()->getTask()->getID() << std::endl;
+
+    // for (int i = 0; i < trace.size(); i++){
+    //     std::cerr << "Task: " << trace[i]->getContent()->getTask()->getID()<< std::endl;
+    //     std::cerr << "History: " << trace[i]->getContent()->getTask()->getExecutionHistory().<< std::endl;
+    //     std::cerr << "////////////////////////////////" << std::endl;
+    // }
+
+    // std::cerr << "---------------------------------" << std::endl;
+
+    for (int i = 0; i < trace.size(); i++){
+        std::cerr << "Task: " << trace[i]->getContent()->getTask()->getID()<< std::endl;
+        std::cerr << "Time:  " << trace[i]->getContent()->getTask()->getEndDate()-(trace[i]->getContent()->getTask()->getStartDate())<< std::endl;
+        std::cerr << "Host: " << trace[i]->getContent()->getTask()->getPhysicalExecutionHost()<< std::endl;
+        std::cerr << "////////////////////////////////" << std::endl;
+    }
 
     return 0;
 }
